@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../entity/User";
+import { User, UserRole } from "../entity/User";
 import { AppDataSource } from "../data-source";
 
 interface JobDetails {
@@ -66,7 +66,7 @@ export class LinkedInService {
           name: profile.name,
           email: profile.email,
           linkedInAccessToken: accessToken,
-          role: "employer"
+          role: UserRole.EMPLOYER,
         });
       } else {
         // Update existing user

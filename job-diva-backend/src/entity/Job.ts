@@ -10,13 +10,13 @@ import { User } from "./User";
 @Entity()
 export class Job {
   @PrimaryGeneratedColumn("uuid")
-  id!: number;
+  id!: string;
 
   @Column()
   title!: string;
 
   @Column()
-  company!: string;
+  companyName!: string;
 
   @Column()
   location!: string;
@@ -37,6 +37,8 @@ export class Job {
   description!: string;
 
   @Column("simple-array")
+  platforms!: string[];
+
   @CreateDateColumn()
   postedAt?: Date;
 

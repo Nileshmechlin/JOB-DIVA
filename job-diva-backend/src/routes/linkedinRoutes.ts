@@ -1,13 +1,13 @@
 import { Router, Request, Response } from "express";
-import { LinkedInController } from "../controller/linkedinController";
+import { authRedirect, handleCallback, postJob } from "../controller/linkedinController";
 import { isAuthenticated } from "../middleware/auth";
 import { RequestHandler } from "express";
 
 const router = Router();
 
 // Public routes
-router.get("/auth", LinkedInController.authRedirect as RequestHandler);
-router.get("/callback", LinkedInController.handleCallback as RequestHandler);
+router.get("/auth", authRedirect as RequestHandler);
+router.get("/callback", handleCallback as RequestHandler);
 
 // Check LinkedIn connection status
 router.get("/status", 
@@ -29,7 +29,7 @@ router.get("/status",
 // Protected routes
 router.post("/post-job", 
   isAuthenticated as RequestHandler,
-  LinkedInController.postJob as RequestHandler
+  postJob
 );
 
 export default router;

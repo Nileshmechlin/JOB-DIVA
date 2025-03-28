@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as LinkedInStrategy } from "passport-linkedin-oauth2";
-import { User } from "../entity/User";
+import { User, UserRole } from "../entity/User";
 import { AppDataSource } from "../data-source";
 import dotenv from "dotenv";
 
@@ -39,9 +39,9 @@ passport.use(
           user = userRepo.create({
             linkedInId: profile.id,
             name: profile.displayName,
-            email: profile.emails?.[0]?.value || null, 
+            email: profile.emails?.[0]?.value ?? undefined, // ✅ Fix: Use undefined instead of null
             linkedInAccessToken: accessToken,
-            role: "employer",
+            role: UserRole.EMPLOYER,
           });
           await userRepo.save(user);
         } else {
